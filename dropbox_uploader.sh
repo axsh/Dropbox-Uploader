@@ -1044,8 +1044,11 @@ function db_share
 #### SETUP  ####
 ################
 
+if [[ -n $OAUTH2_ACCESS_TOKEN ]]; then
+    #No config file is needed if OAUTH2_ACCESS_TOKEN is passed as environment variable.
+    ACCESS_LEVEL="auto"
+elif [[ -e $CONFIG_FILE ]]; then
 #CHECKING FOR AUTH FILE
-if [[ -e $CONFIG_FILE ]]; then
 
     #Loading data... and change old format config if necesary.
     source "$CONFIG_FILE" 2>/dev/null || {
