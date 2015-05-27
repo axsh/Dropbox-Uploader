@@ -1108,7 +1108,10 @@ elif [[ -e $CONFIG_FILE ]]; then
     }
 
     #Checking the loaded data
-    if [[ $APPKEY == "" || $APPSECRET == "" || $OAUTH_ACCESS_TOKEN_SECRET == "" || $OAUTH_ACCESS_TOKEN == "" ]]; then
+    if [[ -n $OAUTH2_ACCESS_TOKEN ]]; then
+        #Skip to check oauth1 parameters.
+        :
+    elif [[ $APPKEY == "" || $APPSECRET == "" || $OAUTH_ACCESS_TOKEN_SECRET == "" || $OAUTH_ACCESS_TOKEN == "" ]]; then
         echo -ne "Error loading data from $CONFIG_FILE...\n"
         echo -ne "It is recommended to run $0 unlink\n"
         remove_temp_files
