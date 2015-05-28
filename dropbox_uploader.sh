@@ -125,10 +125,10 @@ if [[ $CURL_BIN == "" ]]; then
 fi
 
 #Dependencies check
-which $BIN_DEPS > /dev/null
+type -P $BIN_DEPS > /dev/null
 if [[ $? != 0 ]]; then
     for i in $BIN_DEPS; do
-        which $i > /dev/null ||
+        type -P $i > /dev/null ||
             NOT_FOUND="$i $NOT_FOUND"
     done
     echo -e "Error: Required program could not be found: $NOT_FOUND"
@@ -137,7 +137,7 @@ fi
 
 #Check if readlink is installed and supports the -m option
 #It's not necessary, so no problem if it's not installed
-which readlink > /dev/null
+type -P readlink > /dev/null
 if [[ $? == 0 && $(readlink -m "//test" 2> /dev/null) == "/test" ]]; then
     HAVE_READLINK=1
 else
@@ -152,7 +152,7 @@ if [[ $? == 0 ]]; then
     PRINTF="builtin printf"
     PRINTF_OPT="-v o"
 else
-    PRINTF=$(which printf)
+    PRINTF=$(type -P printf)
     if [[ $? != 0 ]]; then
         echo -e "Error: Required program could not be found: printf"
     fi
