@@ -609,7 +609,7 @@ function db_upload_dir
     db_mkdir "$DIR_DST"
 
     for file in "$DIR_SRC/"*; do
-        db_upload "$file" "$DIR_DST"
+        db_upload "$file" "$DIR_DST/$(basename $file)"
     done
 }
 
